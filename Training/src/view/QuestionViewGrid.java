@@ -52,13 +52,16 @@ public class QuestionViewGrid extends javax.swing.JFrame {
         Questions xmlObject = Training.jaxbXMLToObject();
         Training.itilQuestions = xmlObject;
         //JOptionPane.showMessageDialog(null, xmlObject.getQuestions());
-        List qs = new ArrayList(xmlObject.getQuestions());
+        List<Question> qs = new ArrayList(xmlObject.getQuestions());
         //qs = xmlObject.getQuestions();
-        for (int i = 0; i < qs.size(); i++) {
-            Question x;
-            x = (Question) qs.get(i);
-            model.addRow(new Object[]{x.getQID(), x.getQuestion(), "Op1", "Op2", "Op3", "Op4", x.getAnswer()});
-        }
+        qs.stream().forEach((a) -> {
+            model.addRow(new Object[]{a.getQID(), a.getQuestion(), "Op1", "Op2", "Op3", "Op4", a.getAnswer()});
+        });
+//        for (int i = 0; i < qs.size(); i++) {
+//            Question x;
+//            x = (Question) qs.get(i);
+//            model.addRow(new Object[]{x.getQID(), x.getQuestion(), "Op1", "Op2", "Op3", "Op4", x.getAnswer()});
+//        }
         ListSelectionModel selectionModel = tblQuestions.getSelectionModel();
         selectionModel.setSelectionInterval(selectedRow, selectedRow);
         //ListSelectionModel model = table.getSelectionModel();
@@ -188,6 +191,8 @@ public class QuestionViewGrid extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //model.removeRow(tblQuestions.getSelectedRow());
         JOptionPane.showMessageDialog(null, selectedRow);
+        Questions xmlObject = Training.itilQuestions;
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
